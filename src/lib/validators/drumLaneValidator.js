@@ -8,15 +8,23 @@ export const validateDrumLanes = (lines) => {
 
   const drumLines = lines
     .slice(startIdx + 1, endIdx)
-    .filter((line) => line.trim() !== "");
+    .filter((line) => line.trim() !== ""); // Remove empty lines
   const usedRows = new Set();
 
   for (const line of drumLines) {
     const parts = line.split("#")[0].trim().split(" ");
-    const [rowSpec] = parts;
+    const rowSpec = parts[0];
+
+    if (!rowSpec || !rowSpec.includes(":")) {
+      return {
+        valid: false,
+        error: `Invalid or missing drum lane specification: ${line}`,
+      };
+    }
+
     const [row, trig, chan, note] = rowSpec.split(":");
 
-    // Check row number and uniqueness
+    // Validate row number and uniqueness
     if (isNaN(row) || row < 1 || row > 8) {
       return {
         valid: false,
