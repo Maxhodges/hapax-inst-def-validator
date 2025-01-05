@@ -1,0 +1,6 @@
+body {
+  background-color: #111827; /* Dark background */
+  color: #e5e7eb; /* Light text for readability */
+  margin: 0; /* Remove default browser margin */
+  height: 100vh; /* Full viewport height */
+}

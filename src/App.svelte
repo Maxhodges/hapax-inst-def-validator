@@ -1,5 +1,6 @@
 <script>
   import Footer from "./Footer.svelte";
+  import "./global.css";
   import {
     validateVersion,
     validateTrackName,
@@ -130,12 +131,24 @@
           placeholder="Paste your text here..."
           bind:value={userInput}
         ></textarea>
-        <button
-          class="px-4 py-2 mt-2 text-gray-200 bg-blue-600 rounded-lg hover:bg-blue-500"
-          on:click={handleTextareaValidation}
-        >
-          Validate Text
-        </button>
+        <div class="flex items-center mt-2 space-x-2">
+          <button
+            class="px-4 py-2 text-gray-200 bg-blue-600 rounded-lg hover:bg-blue-500"
+            on:click={handleTextareaValidation}
+          >
+            Validate Text
+          </button>
+          <button
+            class="px-4 py-2 text-gray-200 bg-red-600 rounded-lg hover:bg-red-500"
+            on:click={() => {
+              userInput = "";
+              validationResults = null;
+              error = null;
+            }}
+          >
+            Clear
+          </button>
+        </div>
       </div>
 
       <!-- Error Display -->
