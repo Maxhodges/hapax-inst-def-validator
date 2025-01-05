@@ -3,7 +3,8 @@ export const validateVersion = (lines) => {
   if (!versionLine)
     return {
       valid: false,
-      error: "Missing VERSION. Make sure it's not commented (e.g., VERSION 1).",
+      error:
+        "Missing VERSION. Make sure it’s not preceded by a '#' (e.g., VERSION 1).",
     };
 
   const version = versionLine.split("#")[0].trim().split(" ")[1];
