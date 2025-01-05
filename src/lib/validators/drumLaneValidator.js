@@ -15,14 +15,22 @@ export const validateDrumLanes = (lines) => {
     const parts = line.split("#")[0].trim().split(" ");
     const rowSpec = parts[0];
 
-    if (!rowSpec || !rowSpec.includes(":")) {
+    if (!rowSpec) {
       return {
         valid: false,
         error: `Invalid or missing drum lane specification: ${line}`,
       };
     }
 
-    const [row, trig, chan, note] = rowSpec.split(":");
+    const rowSpecParts = rowSpec.split(":");
+    if (rowSpecParts.length < 4) {
+      return {
+        valid: false,
+        error: `Incomplete drum lane specification: ${line}`,
+      };
+    }
+
+    const [row, trig, chan, note] = rowSpecParts;
 
     // Validate row number and uniqueness
     if (isNaN(row) || row < 1 || row > 8) {
@@ -50,9 +58,9 @@ export const validateDrumLanes = (lines) => {
     // Validate channel
     if (chan !== "NULL") {
       if (
-        chan.startsWith("G") ||
-        chan.startsWith("CV") ||
-        chan.startsWith("CVG")
+        chan?.startsWith("G") ||
+        chan?.startsWith("CV") ||
+        chan?.startsWith("CVG")
       ) {
         const num = chan.replace(/[^0-9]/g, "");
         if (isNaN(num) || num < 1 || num > 4) {
