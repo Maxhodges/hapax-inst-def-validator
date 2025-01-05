@@ -9,4 +9,5 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
+  publicDir: "public", // Serve static files from public
 });

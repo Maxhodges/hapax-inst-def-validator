@@ -26,33 +26,6 @@
   let userInput = "";
   let showFileContent = false;
 
-  // Theme-related logic
-  let themes = [];
-  let selectedTheme = "dark";
-
-  import { onMount } from "svelte";
-
-  onMount(() => {
-    console.log("onMount is running...");
-    loadThemes();
-  });
-
-  const loadThemes = async () => {
-    console.log("loadThemes is running...");
-    try {
-      const response = await fetch("/app.css"); // Adjust path as needed
-      console.log("Fetch response:", response);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const css = await response.text();
-      console.log("Fetched CSS:", css); // Log the fetched CSS
-    } catch (err) {
-      console.error("Failed to fetch CSS:", err);
-    }
-  };
-
   const validateContent = (text) => {
     try {
       const lines = text.split("\n");
@@ -122,7 +95,6 @@
 <main
   class="app-content min-h-screen bg-[var(--color-background)] bg-cyber-grid"
 >
-  <p>Available themes: {JSON.stringify(themes)}</p>
   <!-- Debug: Show themes -->
 
   <div class="container max-w-4xl p-4 pb-16 mx-auto">
@@ -138,13 +110,11 @@
         on:error={handleError}
         on:clear={handleClear}
       />
-
-      <ValidationResults {validationResults} {error} {copyResultsToClipboard} />
     </div>
   </div>
 </main>
 
-<Footer {selectedTheme} {themes} />
+<Footer />
 
 <style>
   .app-content {

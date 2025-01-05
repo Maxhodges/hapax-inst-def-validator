@@ -1,7 +1,38 @@
-/* app.css or styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Cyberpunk Theme */
+/* Global styles */
+body {
+  background-color: #050a0e;
+  background-image: linear-gradient(
+      45deg,
+      rgba(0, 240, 255, 0.05) 25%,
+      transparent 25%
+    ),
+    linear-gradient(-45deg, rgba(0, 240, 255, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(0, 240, 255, 0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(0, 240, 255, 0.05) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  color: #fafafa;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Themes */
 :root {
+  --color-primary: #3f6d4e;
+  --color-secondary: #8bd450;
+  --color-accent: #965fd4;
+  --color-alt1: #734f9a;
+  --color-alt2: #1d1a2f;
+  --color-background: #1d1a2f;
+  --color-text: #8bd450;
+}
+
+body.cyberpunk {
+
   --color-primary: #ff003c;
   --color-secondary: #fcee09;
   --color-accent: #00f0ff;
@@ -9,9 +40,9 @@
   --color-alt2: #fafafa;
   --color-background: #050a0e;
   --color-text: #fafafa;
+
 }
 
-/* Evangelion Theme */
 body.evangelion {
   --color-primary: #3f6d4e;
   --color-secondary: #8bd450;

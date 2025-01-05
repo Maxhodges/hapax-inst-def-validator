@@ -1,18 +1,4 @@
 <script>
-  // Props passed from the parent (App.svelte)
-  export let selectedTheme;
-  export let themes;
-
-  // Apply the selected theme to the document body
-  const applyTheme = () => {
-    document.body.className = ""; // Reset all theme classes
-    if (selectedTheme) {
-      document.body.classList.add(selectedTheme); // Apply the selected theme
-    }
-  };
-
-  // Reactively apply the theme whenever `selectedTheme` changes
-  $: applyTheme();
 </script>
 
 <footer class="footer">
@@ -58,18 +44,6 @@
       </a>
       &#125; :: location(JP)
     </p>
-
-    <!-- Theme Switcher Dropdown -->
-    <div>
-      <label for="theme-selector" class="block mb-2 text-[var(--color-text)]">
-        Switch Theme
-      </label>
-      <select id="theme-selector" bind:value={selectedTheme}>
-        {#each themes as theme}
-          <option value={theme}>{theme}</option>
-        {/each}
-      </select>
-    </div>
   </div>
 </footer>
 
