@@ -1,7 +1,11 @@
 export const validateVersion = (lines) => {
   const versionLine = lines.find((line) => line.trim().startsWith("VERSION"));
   if (!versionLine)
-    return { valid: false, error: "Missing VERSION declaration" };
+    return {
+      valid: false,
+      error: "Missing VERSION. Make sure it's not commented (e.g., VERSION 1).",
+    };
+
   const version = versionLine.split("#")[0].trim().split(" ")[1];
   return version === "1"
     ? { valid: true }
