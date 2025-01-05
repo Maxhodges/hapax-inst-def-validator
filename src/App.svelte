@@ -17,23 +17,17 @@
   let validationResults = null;
   let error = null;
   let fileContent = null;
+  let userInput = ""; // New state for user-pasted input
   let showFileContent = false;
 
-  // Add dark mode by default
   import { onMount } from "svelte";
   onMount(() => {
     document.documentElement.classList.add("dark");
   });
 
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
+  const validateContent = (text) => {
     try {
-      const text = await file.text();
-      fileContent = text;
       const lines = text.split("\n");
-
       validationResults = {
         version: validateVersion(lines),
         trackName: validateTrackName(lines),
@@ -46,10 +40,32 @@
       };
       error = null;
     } catch (err) {
+      error = "Validation error: " + err.message;
+      validationResults = null;
+    }
+  };
+
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      fileContent = text;
+      validateContent(text);
+    } catch (err) {
       error = "Error reading file: " + err.message;
       validationResults = null;
-      fileContent = null;
     }
+  };
+
+  const handleTextareaValidation = () => {
+    if (!userInput.trim()) {
+      error = "Input cannot be empty.";
+      return;
+    }
+    fileContent = userInput;
+    validateContent(userInput);
   };
 
   const toggleFileContent = () => {
@@ -86,7 +102,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
               />
             </svg>
             <p class="mb-2 text-sm text-gray-300">
@@ -101,6 +117,22 @@
             on:change={handleFileUpload}
           />
         </label>
+      </div>
+
+      <!-- OR Text Input Area -->
+      <div>
+        <textarea
+          class="w-full p-4 text-sm text-gray-200 bg-gray-700 border border-gray-600 rounded-lg"
+          rows="10"
+          placeholder="Paste your text here..."
+          bind:value={userInput}
+        ></textarea>
+        <button
+          class="px-4 py-2 mt-2 text-gray-200 bg-blue-600 rounded-lg hover:bg-blue-500"
+          on:click={handleTextareaValidation}
+        >
+          Validate Text
+        </button>
       </div>
 
       <!-- Error Display -->
@@ -143,53 +175,6 @@
           {/each}
         </div>
       {/if}
-
-      <!-- File Content Preview -->
-      {#if fileContent}
-        <div class="mt-6">
-          <button
-            on:click={toggleFileContent}
-            class="px-4 py-2 mb-2 text-gray-200 bg-gray-700 rounded-lg hover:bg-gray-600"
-          >
-            {showFileContent ? "Hide" : "Show"} File Content
-          </button>
-
-          {#if showFileContent}
-            <pre
-              class="p-4 overflow-x-auto text-sm text-gray-200 bg-gray-700 border border-gray-600 rounded-lg">
-              {fileContent}
-            </pre>
-          {/if}
-        </div>
-      {/if}
     </div>
   </div>
 </main>
-
-<footer class="fixed bottom-0 w-full shadow-lg bg-gray-800/80 backdrop-blur-sm">
-  <div class="container px-4 py-3 mx-auto text-sm text-center text-gray-300">
-    <p>
-      Created by <a
-        href="https://maxhodges.com"
-        class="text-blue-400 hover:text-blue-300">Max Hodges</a
-      >
-      · Made in Japan · See also:
-      <a
-        href="https://github.com/Maxhodges/noise-engineering-firmware-index"
-        class="text-blue-400 hover:text-blue-300"
-        >Noise Engineering Firmware Index</a
-      >
-    </p>
-  </div>
-</footer>
-
-<style>
-  :global(body) {
-    background-color: rgb(17 24 39);
-  }
-
-  pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-</style>
