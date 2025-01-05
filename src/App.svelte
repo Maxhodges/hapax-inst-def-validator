@@ -105,7 +105,7 @@
       <p class="mt-2 text-sm text-gray-300">
         Need help with your instrument definition files?
         <a
-          href="https://github.com/Maxhodges/hapax-inst-def-validator/blob/main/README.md#hapax-instrument-definition-guide"
+          href="https://github.com/Maxhodges/hapax-inst-def-validator/blob/main/readme.MD#hapax-instrument-definition-guide"
           class="font-medium text-blue-400 hover:text-blue-300"
         >
           Check out the Common Mistakes Guide
