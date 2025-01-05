@@ -114,6 +114,8 @@
   </div>
 </main>
 
+<ValidationResults {validationResults} {error} />
+
 <Footer />
 
 <style>

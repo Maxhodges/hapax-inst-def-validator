@@ -39,7 +39,7 @@
 <!-- Error Display -->
 {#if error}
   <div
-    class="px-4 py-3 mt-4 border rounded border-cyberpunk-red text-[var(--color-accent)] bg-[var(--color-background)]"
+    class="px-4 py-3 mt-4 border rounded border-[var(--color-accent)] text-[var(--color-accent)] bg-[var(--color-background)]"
   >
     <strong class="font-mono">ERROR_DETECTED &gt;&gt;</strong>
     <span class="block mt-1">{error}</span>
@@ -50,8 +50,8 @@
 {#if validationResults}
   <div
     class="p-4 mt-4 rounded-lg mb-4 font-mono border bg-[var(--color-background)] {hasErrors
-      ? 'border-cyberpunk-red text-[var(--color-accent)]'
-      : 'border-cyberpunk-cyan text-[var(--color-secondary)]'}"
+      ? 'border-[var(--color-accent)] text-[var(--color-accent)]'
+      : 'border-[var(--color-secondary)] text-[var(--color-text)]'}"
   >
     <h2 class="text-xl font-bold animate-glitch">
       {hasErrors ? "VALIDATION_FAILED" : "ALL_CHECKS_PASSED"}
@@ -62,8 +62,8 @@
     {#each Object.entries(validationResults) as [check, result]}
       <div
         class="p-4 rounded-lg font-mono transition-all border bg-[var(--color-background)] hover:translate-x-1 {result.valid
-          ? 'border-cyberpunk-cyan text-[var(--color-secondary)]'
-          : 'border-cyberpunk-red text-[var(--color-accent)]'}"
+          ? 'border-[var(--color-secondary)] text-[var(--color-text)]'
+          : 'border-[var(--color-accent)] text-[var(--color-accent)]'}"
       >
         <h3 class="font-bold">
           {labelMap[check] || check}_
@@ -74,7 +74,7 @@
   </div>
 
   <button
-    class="px-4 py-2 mt-4 font-mono transition-all rounded-lg bg-cyberpunk-yellow text-cyberpunk-black hover:bg-cyberpunk-yellow hover:scale-105 active:scale-95"
+    class="px-4 py-2 mt-4 font-mono transition-all rounded-lg bg-[var(--color-secondary)] text-[var(--color-background)] hover:scale-105 active:scale-95"
     on:click={copyResultsToClipboard}
   >
     COPY_RESULTS_
