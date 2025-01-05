@@ -1,0 +1,68 @@
+VERSION 1 # Currently, this should only be 1.
+
+###### DEFINITIONS
+
+# Supports all alphanumeric ASCII, and ' ', '_', '-', '+' - can also be NULL
+TRACKNAME Pulsar23_BASS
+
+# Can be POLY, DRUM, MPE, or NULL
+TYPE POLY
+
+# Can be A, B, C, D, USBD, USBH, CVGx (x between 1&4), CVx, Gx, or NULL
+OUTPORT NULL
+
+# Can be x (between 1-16), or NULL -- this is ignored if output port is not MIDI
+OUTCHAN 2
+
+# Can be NONE, ALLACTIVE, A, B, USBH, USBD, CVG, or NULL
+INPORT NONE
+
+# Can be x (between 1-16), ALL, or NULL -- ignored if INPORT is NONE, ALLACTIVE or CVG
+INCHAN NULL
+
+# This defines the default 'MAX RATE' for automation lanes.
+# Can be NULL, 192, 96, 64, 48, 32, 24, 16, 12, 8, 6, 4, 3, 2, 1
+MAXRATE NULL
+
+# CC
+# The BASS module's primary controls
+[CC]
+5 Portamento
+20 Shape
+21 Warp
+
+# MIDI-CV converters
+1 MIDI_CV1
+2 MIDI_CV2
+3 MIDI_CV3
+4 MIDI_CV4
+[/CC]
+
+# The BASS module responds to pitch bend with +/- 12 semitones
+[CC_PAIR]
+0:32 Pitch_Bend
+[/CC_PAIR]
+
+# AUTOMATION
+# Key automation lanes for performance control
+[AUTOMATION]
+CC:20  # Shape
+CC:21  # Warp
+CC:5   # Portamento
+CC:1   # MIDI CV1
+CC:2   # MIDI CV2
+CC:3   # MIDI CV3
+CC:4   # MIDI CV4
+[/AUTOMATION]
+
+# This section will be readable from Hapax.
+[COMMENT]
+Pulsar-23 BASS module configuration.
+- Monophonic synthesizer voice with extensive modulation options
+- Supports pitch bend (±12 semitones) and portamento
+- Shape and Warp parameters provide core sound shaping
+- 4 MIDI-CV converters available for additional modulation
+- First MIDI-CV converter (CC1) can be used for key tracking
+- Use LRN buttons on device for direct MIDI learning of controls
+- MIDI panic: Press SHAPE and WARP LRN buttons simultaneously
+[/COMMENT]

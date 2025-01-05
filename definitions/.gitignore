@@ -41,3 +41,9 @@ lerna-debug.log*
 # Vite
 .vite
 *.local
+
+# Package managers
+pnpm-lock.yaml
+.modules.yaml
+/node_modules/
+/node_modules/**

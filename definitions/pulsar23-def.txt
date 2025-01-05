@@ -1,0 +1,82 @@
+VERSION 1 # Currently, this should only be 1.
+
+###### DEFINITIONS
+
+# Supports all alphanumeric ASCII, and ' ', '_', '-', '+' - can also be NULL
+TRACKNAME Pulsar23_DRUM
+
+# Can be POLY, DRUM, MPE, or NULL
+TYPE DRUM
+
+# Can be A, B, C, D, USBD, USBH, CVGx (x between 1&4), CVx, Gx, or NULL
+OUTPORT NULL
+
+# Can be x (between 1-16), or NULL -- this is ignored if output port is not MIDI
+OUTCHAN 1
+
+# Can be NONE, ALLACTIVE, A, B, USBH, USBD, CVG, or NULL
+INPORT NONE
+
+# Can be x (between 1-16), ALL, or NULL. This definition will be ignored if INPORT is NONE, ALLACTIVE or CVG
+INCHAN NULL
+
+# This defines the default 'MAX RATE' for automation lanes.
+# Can be NULL, 192, 96, 64, 48, 32, 24, 16, 12, 8, 6, 4, 3, 2, 1
+MAXRATE NULL
+
+# DRUMLANES
+# Each module can be triggered via MIDI with velocity sensitivity
+[DRUMLANES]
+4:NULL:1:53 HHT
+3:NULL:1:52 SD
+2:NULL:1:51 BASS
+1:NULL:1:50 BD
+[/DRUMLANES]
+
+# CC
+# The Pulsar has 12 automatable parameters including shapes, warps, and MIDI-CV converters
+[CC]
+1 MIDI_CV1
+2 MIDI_CV2
+3 MIDI_CV3
+4 MIDI_CV4
+5 Portamento
+20 BASS_Shape
+21 BASS_Warp
+
+# Adding controls for each synthesis module's parameters
+30 BD_Level
+31 BD_Tone
+32 SD_Level
+33 SD_Tone
+34 HHT_Level
+35 HHT_Tone
+[/CC]
+
+# The BASS module responds to pitch bend with +/- 12 semitones
+[CC_PAIR]
+0:32 Pitch_Bend
+[/CC_PAIR]
+
+# AUTOMATION
+# Including key automation lanes for live performance
+[AUTOMATION]
+CC:20  # BASS Shape
+CC:21  # BASS Warp
+CC:1   # MIDI CV1 (Key Tracking when used with BASS)
+CC:2   # MIDI CV2
+CC:3   # MIDI CV3
+CC:4   # MIDI CV4
+[/AUTOMATION]
+
+# This section will be readable from Hapax.
+[COMMENT]
+Pulsar-23 drum machine configuration.
+- BASS module supports pitch bend (±12 semitones) and portamento
+- 4 MIDI-CV converters available
+- First MIDI-CV converter (CC1) can be used for key tracking with BASS module
+- Supports MIDI clock sync for the internal clock dividers and looper
+- Use LRN buttons on device for direct MIDI learning of controls
+- Clear MIDI assignments: Press LRN buttons of BD, BASS, SD, HHT simultaneously
+- MIDI panic: Press SHAPE and WARP LRN buttons simultaneously
+[/COMMENT]
