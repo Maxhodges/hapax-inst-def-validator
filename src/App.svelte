@@ -85,10 +85,9 @@
 
     const fullText = `## ${hasErrors ? "Validation Failed" : "All Checks Passed"}\n\n${resultsText}\n\nCourtesy of hapax-validator.maxhodges.com`;
 
-    navigator.clipboard.writeText(fullText).then(
-      () => alert("Results copied to clipboard!"),
-      (err) => alert("Failed to copy results: " + err.message)
-    );
+    navigator.clipboard.writeText(fullText).catch((err) => {
+      console.error("Failed to copy results to clipboard:", err);
+    });
   };
 
   $: hasErrors =
@@ -96,7 +95,7 @@
     Object.values(validationResults).some((result) => !result.valid);
 </script>
 
-<main class="container max-w-4xl min-h-screen p-4 mx-auto bg-gray-900">
+<main class="container max-w-4xl min-h-screen p-4 pb-16 mx-auto bg-gray-900">
   <div class="p-6 bg-gray-800 rounded-lg shadow-xl">
     <h1 class="mb-6 text-2xl font-bold text-white">
       Hapax Definition File Validator
@@ -181,7 +180,7 @@
 
         <!-- Copy Results Button -->
         <button
-          class="px-4 py-2 mt-4 text-gray-200 bg-green-600 rounded-lg hover:bg-green-500"
+          class="px-4 py-2 mt-4 text-gray-200 transition-all duration-150 ease-in-out bg-green-600 rounded-lg hover:bg-green-500 active:scale-95 active:bg-green-700"
           on:click={copyResultsToClipboard}
         >
           Copy Results
