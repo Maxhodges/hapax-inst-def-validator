@@ -69,9 +69,7 @@
           <p class="mb-2 font-mono text-[var(--color-secondary)]">
             <span class="font-semibold">&gt; DROP_FILE</span> || click.upload()
           </p>
-          <p class="text-xs text-[var(--color-primary)]">
-            format: definition.txt
-          </p>
+          <p class="text-xs text-[var(--color-primary)]">format: .TXT</p>
         </div>
         <input
           type="file"
