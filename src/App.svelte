@@ -98,9 +98,20 @@
 
 <main class="container max-w-4xl min-h-screen p-4 pb-16 mx-auto bg-gray-900">
   <div class="p-6 bg-gray-800 rounded-lg shadow-xl">
-    <h1 class="mb-6 text-2xl font-bold text-white">
-      Hapax Definition File Validator
-    </h1>
+    <header class="py-6 text-center header">
+      <h1 class="text-3xl font-bold text-white">
+        Hapax Definition File Validator
+      </h1>
+      <p class="mt-2 text-sm text-gray-300">
+        Need help with your instrument definition files?
+        <a
+          href="https://github.com/Maxhodges/hapax-inst-def-validator/blob/main/README.md#hapax-instrument-definition-guide"
+          class="font-medium text-blue-400 hover:text-blue-300"
+        >
+          Check out the Common Mistakes Guide
+        </a>.
+      </p>
+    </header>
 
     <div class="space-y-4">
       <!-- File Upload Area -->

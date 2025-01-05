@@ -17,17 +17,17 @@ Try it now at [hapax-validator.maxhodges.com](https://hapax-validator.maxhodges.
 - Copy validation results to the clipboard.
 - Dark mode enabled by default.
 
-# Hapax Instrument Definition File Validator
+## Hapax Instrument Definition Guide
 
-## Overview
+### Overview
 
 The Hapax Instrument Definition File Validator helps ensure your instrument definition files are correctly formatted. This guide outlines common mistakes and how to avoid them.
 
 ---
 
-## Common Mistakes to Avoid
+### Common Mistakes to Avoid
 
-### 1. VERSION Declaration
+#### 1. VERSION Declaration
 
 - **Issue**: `VERSION` is commented out or missing.
 - **Fix**: Ensure the `VERSION` line is present and not commented. The line must look like this:
@@ -38,7 +38,7 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 
 ---
 
-### 2. DRUMLANES Format
+#### 2. DRUMLANES Format
 
 - **Issue**: Drum lanes are incomplete or not properly formatted.
 - **Fix**: Each drum lane must be a single line with all fields: `ROW:TRIG:CHAN:NOTENUMBER NAME`.
@@ -52,7 +52,7 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 
 ---
 
-### 3. Invalid Characters
+#### 3. Invalid Characters
 
 - **Issue**: Names contain unsupported characters.
 - **Fix**: Use only alphanumeric characters, spaces, `_`, `-`, `+`, `.`, `/`, `(`, `)`, `[`, `]`.
@@ -64,7 +64,7 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 
 ---
 
-### 4. Empty or Unnecessary Sections
+#### 4. Empty or Unnecessary Sections
 
 - **Issue**: Empty sections like `[CC]` or `[NRPN]` are left in the file.
 - **Fix**: Remove sections if not used.
@@ -79,14 +79,14 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 
 ---
 
-### 5. Commenting Out Lines
+#### 5. Commenting Out Lines
 
 - **Issue**: Important lines are accidentally commented out with `#`.
 - **Fix**: Only use `#` for comments, and ensure required lines (e.g., `VERSION`, `TRACKNAME`) are not preceded by `#`.
 
 ---
 
-### 6. Missing or Invalid NOTENUMBER
+#### 6. Missing or Invalid NOTENUMBER
 
 - **Issue**: `NOTENUMBER` is missing or not within the valid range (0–127).
 - **Fix**: Ensure all drum lanes include a valid `NOTENUMBER`.
@@ -98,7 +98,7 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 
 ---
 
-## Quick Validation Checklist
+### Quick Validation Checklist
 
 Before saving your file, verify:
 
@@ -110,7 +110,7 @@ Before saving your file, verify:
 
 ---
 
-## Example of a Valid File
+### Example of a Valid File
 
 ```
 VERSION 1
