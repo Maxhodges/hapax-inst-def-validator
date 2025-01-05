@@ -11,7 +11,11 @@
     validateInport,
   } from "./lib/validators/portConfigValidator";
 
-  import { validateOutChannel } from "./lib/validators/channelValidator";
+  import {
+    validateOutChannel,
+    validateInChannel,
+  } from "./lib/validators/channelValidator";
+
   import { validateDrumLanes } from "./lib/validators/drumLaneValidator";
   import { validateCCs } from "./lib/validators/ccValidator";
   import { validateNRPNs } from "./lib/validators/nrpnValidator";
@@ -21,6 +25,18 @@
   let fileContent = null;
   let userInput = ""; // New state for user-pasted input
   let showFileContent = false;
+
+  const labelMap = {
+    version: "VERSION",
+    trackName: "TRACKNAME",
+    outport: "OUTPORT",
+    inport: "INPORT",
+    outChannel: "OUTCHAN",
+    inChannel: "INCHAN",
+    drumLanes: "DRUMLANES",
+    midicc: "(MIDI) CC",
+    nrpns: "NRPN",
+  };
 
   import { onMount } from "svelte";
   onMount(() => {
@@ -36,8 +52,9 @@
         outport: validateOutport(lines),
         inport: validateInport(lines),
         outChannel: validateOutChannel(lines),
+        inChannel: validateInChannel(lines),
         drumLanes: validateDrumLanes(lines),
-        ccs: validateCCs(lines),
+        midicc: validateCCs(lines),
         nrpns: validateNRPNs(lines),
       };
       error = null;
@@ -194,8 +211,9 @@
                 ? 'bg-green-900/20 text-green-200 border border-green-800'
                 : 'bg-red-900/20 text-red-200 border border-red-800'}"
             >
-              <h3 class="font-bold capitalize">
-                {check.replace(/([A-Z])/g, " $1").trim()}
+              <h3 class="font-bold">
+                {labelMap[check] || check}
+                <!-- Fallback to original key if not mapped -->
               </h3>
               <p>{result.valid ? "✓ Valid" : `✗ ${result.error}`}</p>
             </div>

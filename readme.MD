@@ -32,9 +32,17 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 - **Issue**: `VERSION` is commented out or missing.
 - **Fix**: Ensure the `VERSION` line is present and not commented. The line must look like this:
 
-  ```
-  VERSION 1
-  ```
+**Bad**:
+
+```plaintext
+# VERSION 1
+```
+
+**Good**:
+
+```plaintext
+VERSION 1
+```
 
 ---
 
@@ -43,12 +51,23 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 - **Issue**: Drum lanes are incomplete or not properly formatted.
 - **Fix**: Each drum lane must be a single line with all fields: `ROW:TRIG:CHAN:NOTENUMBER NAME`.
 
-  ```
-  [DRUMLANES]
-  1:NULL:7:36 Kick
-  2:NULL:7:38 Snare
-  [/DRUMLANES]
-  ```
+**Bad**:
+
+```plaintext
+[DRUMLANES]
+1:NULL:7 Kick
+2:NULL:7:38 Snare
+[/DRUMLANES]
+```
+
+**Good**:
+
+```plaintext
+[DRUMLANES]
+1:NULL:7:36 Kick
+2:NULL:7:38 Snare
+[/DRUMLANES]
+```
 
 ---
 
@@ -57,10 +76,17 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 - **Issue**: Names contain unsupported characters.
 - **Fix**: Use only alphanumeric characters, spaces, `_`, `-`, `+`, `.`, `/`, `(`, `)`, `[`, `]`.
 
-  ```
-  Valid: PORTA_ON_OFF
-  Invalid: PORTA ON/OFF
-  ```
+**Bad**:
+
+```plaintext
+PORTA ON/OFF
+```
+
+**Good**:
+
+```plaintext
+PORTA_ON_OFF
+```
 
 ---
 
@@ -69,13 +95,15 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 - **Issue**: Empty sections like `[CC]` or `[NRPN]` are left in the file.
 - **Fix**: Remove sections if not used.
 
-  ```
-  [CC]
-  [/CC]
-  ```
+**Bad**:
 
-  Becomes:
-  _Omit the entire section._
+```plaintext
+[CC]
+[/CC]
+```
+
+**Good**:
+_If unused, omit the entire section._
 
 ---
 
@@ -84,6 +112,18 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 - **Issue**: Important lines are accidentally commented out with `#`.
 - **Fix**: Only use `#` for comments, and ensure required lines (e.g., `VERSION`, `TRACKNAME`) are not preceded by `#`.
 
+**Bad**:
+
+```plaintext
+# TRACKNAME TR-909
+```
+
+**Good**:
+
+```plaintext
+TRACKNAME TR-909
+```
+
 ---
 
 #### 6. Missing or Invalid NOTENUMBER
@@ -91,10 +131,17 @@ The Hapax Instrument Definition File Validator helps ensure your instrument defi
 - **Issue**: `NOTENUMBER` is missing or not within the valid range (0–127).
 - **Fix**: Ensure all drum lanes include a valid `NOTENUMBER`.
 
-  ```
-  Valid: 1:NULL:7:36 Kick
-  Invalid: 1:NULL:7:NULL Kick
-  ```
+**Bad**:
+
+```plaintext
+1:NULL:7:NULL Kick
+```
+
+**Good**:
+
+```plaintext
+1:NULL:7:36 Kick
+```
 
 ---
 
@@ -112,7 +159,7 @@ Before saving your file, verify:
 
 ### Example of a Valid File
 
-```
+```plaintext
 VERSION 1
 
 TRACKNAME TR-909
@@ -160,3 +207,4 @@ Have questions, suggestions, or feedback? Visit the [GitHub repository](https://
 
    ```bash
    git checkout -b feature-name
+   ```
