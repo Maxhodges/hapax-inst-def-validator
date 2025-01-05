@@ -203,3 +203,12 @@
   </div>
 </main>
 <Footer />
+
+<style>
+  :global(body) {
+    background-color: #111827; /* Same as your app's dark background */
+    color: #e5e7eb;
+    margin: 0;
+    height: 100vh;
+  }
+</style>
