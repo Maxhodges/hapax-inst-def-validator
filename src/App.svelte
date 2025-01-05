@@ -110,11 +110,10 @@
         on:error={handleError}
         on:clear={handleClear}
       />
+      <ValidationResults {validationResults} {error} />
     </div>
   </div>
 </main>
-
-<ValidationResults {validationResults} {error} />
 
 <Footer />
 

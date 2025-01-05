@@ -29,10 +29,11 @@ body {
   --color-alt2: #1d1a2f;
   --color-background: #1d1a2f;
   --color-text: #8bd450;
+  --color-header-bg: #1d1a2f;
+  --color-header-text: #fafafa;
 }
 
 body.cyberpunk {
-
   --color-primary: #ff003c;
   --color-secondary: #fcee09;
   --color-accent: #00f0ff;
@@ -40,7 +41,8 @@ body.cyberpunk {
   --color-alt2: #fafafa;
   --color-background: #050a0e;
   --color-text: #fafafa;
-
+  --color-header-bg: #0d1117;
+  --color-header-text: #fafafa;
 }
 
 body.evangelion {
@@ -51,4 +53,6 @@ body.evangelion {
   --color-alt2: #1d1a2f;
   --color-background: #1d1a2f;
   --color-text: #8bd450;
+  --color-header-bg: #3f6d4e;
+  --color-header-text: #fafafa;
 }

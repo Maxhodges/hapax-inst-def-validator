@@ -3,16 +3,23 @@
     "https://github.com/Maxhodges/hapax-inst-def-validator/blob/main/readme.MD#hapax-instrument-definition-guide";
 </script>
 
-<header class="py-6 text-center bg-theme-primary text-theme-text">
-  <h1 class="text-3xl font-bold text-theme-secondary">
+<header
+  class="py-6 text-center"
+  style="background-color: var(--color-background); color: var(--color-text);"
+>
+  <h1 class="text-3xl font-bold" style="color: var(--color-secondary);">
     Hapax Definition File Validator
   </h1>
   <p class="mt-2 font-mono text-sm">
-    <span class="text-theme-accent">sys.init(validation_protocol)</span>
-    <span class="text-theme-accent">&gt;&gt;</span>
+    <span style="color: var(--color-accent);"
+      >sys.init(validation_protocol)</span
+    >
+    <span style="color: var(--color-accent);">&gt;&gt;</span>
+
     <a
-      href="https://github.com/Maxhodges/hapax-inst-def-validator/blob/main/readme.MD#hapax-instrument-definition-guide"
-      class="font-medium text-theme-secondary hover:opacity-80"
+      href={guideUrl}
+      class="font-medium hover:opacity-80"
+      style="color: var(--color-secondary);"
     >
       documentation.access()
     </a>
