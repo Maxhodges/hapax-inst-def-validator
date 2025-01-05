@@ -16,27 +16,45 @@ export const validateCCs = (lines) => {
     const parts = line.split("#")[0].trim().split(" ");
     const [ccSpec] = parts;
 
-    // Handle CC with default value
-    if (ccSpec.includes(":DEFAULT=")) {
-      const [num, defaultValue] = ccSpec.split(":DEFAULT=");
+    if (ccSpec.includes(":")) {
+      // Handle CC with default value
+      const [num, defaultSpec] = ccSpec.split(":");
 
       if (isNaN(num) || num < 0 || num > 127) {
-        return { valid: false, error: `Invalid CC number: ${line}` };
+        return {
+          valid: false,
+          error: `Invalid CC number: ${num}. Must be between 0-127.`,
+        };
       }
+      if (defaultSpec && !defaultSpec.startsWith("DEFAULT=")) {
+        return {
+          valid: false,
+          error: `Invalid default specifier: '${defaultSpec}'. 'DEFAULT' must be uppercase.`,
+        };
+      }
+
+      const defaultValue = defaultSpec?.split("=")[1];
+      if (
+        defaultValue &&
+        (isNaN(defaultValue) || defaultValue < 0 || defaultValue > 127)
+      ) {
+        return {
+          valid: false,
+          error: `Invalid default value for CC ${num}: ${defaultValue}. Must be 0-127.`,
+        };
+      }
+
       if (usedCCs.has(num)) {
         return { valid: false, error: `Duplicate CC number: ${num}` };
       }
       usedCCs.add(num);
-
-      if (isNaN(defaultValue) || defaultValue < 0 || defaultValue > 127) {
+    } else {
+      // Handle CC without default value
+      if (isNaN(ccSpec) || ccSpec < 0 || ccSpec > 127) {
         return {
           valid: false,
-          error: `Invalid default value for CC ${num}: ${defaultValue}`,
+          error: `Invalid CC number: ${ccSpec}. Must be between 0-127.`,
         };
-      }
-    } else {
-      if (isNaN(ccSpec) || ccSpec < 0 || ccSpec > 127) {
-        return { valid: false, error: `Invalid CC number: ${line}` };
       }
       if (usedCCs.has(ccSpec)) {
         return { valid: false, error: `Duplicate CC number: ${ccSpec}` };
@@ -47,12 +65,11 @@ export const validateCCs = (lines) => {
     // Validate name if present
     if (parts[1]) {
       const name = parts.slice(1).join(" ");
-      // Updated regex to allow more characters commonly used in MIDI parameter names
       const validNameRegex = /^[a-zA-Z0-9\s_\-+./()\[\]]+$/;
       if (!validNameRegex.test(name)) {
         return {
           valid: false,
-          error: `Invalid characters in CC name: ${name}. Allowed characters: letters, numbers, spaces, _, -, +, ., /, (, ), [, ]`,
+          error: `Invalid characters in CC name: '${name}'. Allowed: letters, numbers, spaces, _, -, +, ., /, (, ), [, ].`,
         };
       }
     }
