@@ -37,11 +37,21 @@ export const validateNRPNs = (lines) => {
 
     // Handle special case where LSB > 127
     if (msb === "" || msb === "0") {
-      if (lsb < 0 || lsb > 16383) {
-        return { valid: false, error: `Invalid extended NRPN LSB: ${line}` };
+      const lsbNum = parseInt(lsb);
+      if (isNaN(lsbNum) || lsbNum < 0 || lsbNum > 16383) {
+        return {
+          valid: false,
+          error: `Invalid extended NRPN LSB: ${line}. When MSB is 0 or omitted, LSB can be up to 16383`,
+        };
       }
-    } else if (lsb < 0 || lsb > 127) {
-      return { valid: false, error: `Invalid NRPN LSB: ${line}` };
+    } else {
+      const lsbNum = parseInt(lsb);
+      if (isNaN(lsbNum) || lsbNum < 0 || lsbNum > 127) {
+        return {
+          valid: false,
+          error: `Invalid NRPN LSB: ${line}. Must be between 0-127 when MSB is specified`,
+        };
+      }
     }
 
     // Validate depth
@@ -77,7 +87,7 @@ export const validateNRPNs = (lines) => {
     // Validate name if present
     if (parts[1]) {
       const name = parts.slice(1).join(" ");
-      const validNameRegex = /^[a-zA-Z0-9\s_\-+]+$/;
+      const validNameRegex = /^[a-zA-Z0-9\s_\-+\/()'"*,.!:=<>?@$]+$/;
       if (!validNameRegex.test(name)) {
         return {
           valid: false,

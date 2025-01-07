@@ -8,7 +8,7 @@ export const validateDrumLanes = (lines) => {
 
   const drumLines = lines
     .slice(startIdx + 1, endIdx)
-    .filter((line) => line.trim() !== ""); // Remove empty lines
+    .filter((line) => line.trim() !== "" && !line.trim().startsWith("#")); // Remove empty lines and comments
   const usedRows = new Set();
 
   for (const line of drumLines) {
@@ -88,7 +88,7 @@ export const validateDrumLanes = (lines) => {
     // Validate name if present
     if (parts[1]) {
       const name = parts.slice(1).join(" ");
-      const validNameRegex = /^[a-zA-Z0-9\s_\-+]+$/;
+      const validNameRegex = /^[a-zA-Z0-9\s_\-+\/()'"*,.!:=<>?@$]+$/;
       if (!validNameRegex.test(name)) {
         return {
           valid: false,

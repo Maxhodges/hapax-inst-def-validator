@@ -19,6 +19,9 @@
   import { validateDrumLanes } from "./lib/validators/drumLaneValidator";
   import { validateCCs } from "./lib/validators/ccValidator";
   import { validateNRPNs } from "./lib/validators/nrpnValidator";
+  import { validateCCPairs } from "./lib/validators/ccPairValidator";
+  import { validatePCs } from "./lib/validators/pcValidator";
+  import { validateMaxRate } from "./lib/validators/headerValidator";
 
   let validationResults = null;
   let error = null;
@@ -36,8 +39,11 @@
         inport: validateInport(lines),
         outChannel: validateOutChannel(lines),
         inchan: validateInChannel(lines),
+        maxRate: validateMaxRate(lines),
         drumLanes: validateDrumLanes(lines),
         midicc: validateCCs(lines),
+        ccPairs: validateCCPairs(lines),
+        programChanges: validatePCs(lines),
         nrpns: validateNRPNs(lines),
       };
       error = null;

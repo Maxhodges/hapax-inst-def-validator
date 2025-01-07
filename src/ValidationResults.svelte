@@ -9,8 +9,11 @@
     inport: "INPORT",
     outChannel: "OUTCHAN",
     inChannel: "INCHAN",
+    maxRate: "MAXRATE",
     drumLanes: "DRUMLANES",
     midicc: "(MIDI) CC",
+    ccPairs: "CC PAIRS",
+    programChanges: "PROGRAM CHANGES",
     nrpns: "NRPN",
   };
 

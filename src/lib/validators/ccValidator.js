@@ -65,7 +65,7 @@ export const validateCCs = (lines) => {
     // Validate name if present
     if (parts[1]) {
       const name = parts.slice(1).join(" ");
-      const validNameRegex = /^[a-zA-Z0-9\s_\-+./()\[\]]+$/;
+      const validNameRegex = /^[a-zA-Z0-9\s_\-+\/()'"*,.!:=<>?@$]+$/;
       if (!validNameRegex.test(name)) {
         return {
           valid: false,
