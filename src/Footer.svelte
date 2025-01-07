@@ -1,4 +1,5 @@
 <script>
+  const version = import.meta.env.PACKAGE_VERSION || "0.1.0";
 </script>
 
 <footer class="footer">
@@ -30,7 +31,10 @@
       </a>
       &#125;
     </p>
-
+    <!-- Version Number -->
+    <p class="text-[var(--color-secondary)]">
+      &gt;&gt; app.version &#123; v{version} &#125;
+    </p>
     <!-- Creator Info Section -->
     <p class="text-[var(--color-secondary)]">
       &gt;&gt; creator.info &#123;
