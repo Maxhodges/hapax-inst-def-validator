@@ -69,7 +69,7 @@ export const validateCCs = (lines) => {
       if (!validNameRegex.test(name)) {
         return {
           valid: false,
-          error: `Invalid characters in CC name: '${name}'. Allowed: letters, numbers, spaces, _, -, +, ., /, (, ), [, ].`,
+          error: `Invalid characters in CC name: '${name}'. Allowed: alphanumeric ASCII and special characters: space, _, -, +, /, (, ), ', ", *, ,, ., !, :, =, <, >, ?, @, $`,
         };
       }
     }
