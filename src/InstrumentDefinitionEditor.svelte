@@ -20,6 +20,11 @@
   let formData = { ...initialFormData };
   let generatedContent = "";
 
+  const range = (start, end) =>
+    Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  const ccValues = range(0, 127); // For MIDI CC values (0-127)
+  const fourteenBitValues = range(0, 16383); // For 14-bit values (0-16383)
+
   const generateDefinitionFile = () => {
     if (!formData.trackName?.trim()) {
       alert("Track name is required");
@@ -350,15 +355,16 @@
             <label for="cc-number-{i}" class="text-xs text-theme-text"
               >CC Number</label
             >
-            <input
+            <select
               id="cc-number-{i}"
-              type="number"
               bind:value={cc.number}
-              min="0"
-              max="127"
-              placeholder="0-127"
               class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
-            />
+            >
+              <option value={null}>Select CC...</option>
+              {#each ccValues as value}
+                <option {value}>{value}</option>
+              {/each}
+            </select>
           </div>
 
           <div class="space-y-1">
@@ -377,15 +383,16 @@
             <label for="cc-default-{i}" class="text-xs text-theme-text"
               >Default Value</label
             >
-            <input
+            <select
               id="cc-default-{i}"
-              type="number"
               bind:value={cc.defaultValue}
-              min="0"
-              max="127"
-              placeholder="0-127"
               class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
-            />
+            >
+              <option value={null}>Select Value...</option>
+              {#each ccValues as value}
+                <option {value}>{value}</option>
+              {/each}
+            </select>
           </div>
 
           <div>
@@ -429,6 +436,7 @@
               min="0"
               max="127"
               placeholder="MSB"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
             />
           </div>
 
@@ -443,6 +451,7 @@
               min="0"
               max="127"
               placeholder="LSB"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
             />
           </div>
 
@@ -455,6 +464,7 @@
               type="text"
               bind:value={pair.name}
               placeholder="CC Pair Name"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
             />
           </div>
 
@@ -469,15 +479,13 @@
               min="0"
               max="16383"
               placeholder="0-16383"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
             />
           </div>
 
           <div>
-            <label for="ccpair-remove-{i}" class="invisible text-xs"
-              >Remove</label
-            >
+            <label class="invisible text-xs">Remove</label>
             <button
-              id="ccpair-remove-{i}"
               type="button"
               on:click={() => removeCCPair(i)}
               class="w-full p-2 text-white bg-red-500 rounded-md hover:bg-red-600"
