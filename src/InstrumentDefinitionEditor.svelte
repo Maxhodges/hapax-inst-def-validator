@@ -261,10 +261,11 @@
 
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-2">
-          <label class="block text-sm font-medium text-theme-text"
+          <label for="outPort" class="block text-sm font-medium text-theme-text"
             >Output Port</label
           >
           <input
+            id="outPort"
             type="text"
             bind:value={formData.outPort}
             class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
