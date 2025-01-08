@@ -1,0 +1,75 @@
+handbook
+MIDI
+
+The Pulsar has significant capabilities to be controlled via MIDI.
+MIDI controls have:
+• Dynamic trigger of all four synthesis modules, taking into account velocity.
+• The BASS module recognizes pitch bender (the range is +/- 12 semitones) and portamento
+(CC05).
+• MIDI controllers can be assigned to SHAPE and WARP synthesis parameters of the BASS
+module.
+• The Pulsar can receive MIDI clock which can synchronize the array of clock dividers and the
+looper\recorder. To do this, turn the INT MIDI switch of the clock section to the MIDI position.
+• There are four MIDI to CV converters (MIDI CV block) capable of converting messages from
+MIDI controllers and keyboards into CVs. The converter outputs can then be connected to
+any Pulsar input contacts, which will provide MIDI control or automation of the functions
+connected to these contacts.
+The intention was to make the MIDI implementation as user-friendly as possible. Next to
+each function that has MIDI automation there is a learn (LRN) button, which makes it easy
+
+to assign a MIDI controller there. To do this, press the LRN button next to the desired func-
+tion and turn the midi-controller or press the key on the midi-keyboard that you want to
+
+assign there. The Pulsar will remember the channel number, key or controller number (CC)
+and will remember them even when the power is off.
+Altogether there are 12 parameters that can be automated via MIDI:
+Triggers of the 4 synthesis modules, 4 freely assignable MIDI to CV converters, SHAPE,
+WARP, Portamento and Pitchbender functions of the BASS module.
+To assign a MIDI controller (a key or a continuous controller) to a synthesis module
+(BD, BASS, SD, HHT etc.) hold the LRN button of this module and press the desired
+key or turn the controller.
+
+The pitchbender and portamento functions are firmly fixed to the corresponding mi-
+di-controllers. The receiving midi-channel number of these functions is the same as
+
+the midi-channel number of the keyboard assigned to BASS. Portamento can only be
+adjusted via MIDI.
+The synthesis modules and MIDI to CV converter automatically recognize the key and
+the continuous controller (CC). In case a MIDI keyboard key is assigned, the velocity
+value of the pressed key will be transmitted. If a controller is assigned, the position of
+the controller is transmitted.
+You can control the synthesis module trigger with a continuous controller instead of
+by pressing a key. This will give you many unusual features, such as drawing the attack
+and signal decline in a DAW. To do this, use the LRN button of the desired module and
+assign a continuous controller to the module you need.
+
+You can assign MIDI keys to a MIDI to CV converter, this will give you the opportuni-
+ty to rhythmically control various synthesis parameters (for example, a filter) from a
+
+MIDI keyboard and apply functions such as quantization, which are difficult to use with
+a continuous controller.
+To clear all learned MIDI functions, simultaneously press the LRN buttons of BD, BASS,
+SD and HHT modules (the four buttons at the bottom).
+
+PULSAR•23 USER MANUAL
+
+If any key is assigned to the first channel of the MIDI to CV converter with the same MIDI
+channel as the MIDI keyboard assigned to the BASS module, the key tracking signal of the
+BASS module will be sent to the output of the first channel of the converter. The CV on this
+output will be proportional to the note number that is currently played by the BASS module.
+This function is very useful if, for example, you want the cutoff frequency of the filter to
+follow the pitch of the note being played. To activate this function, simply simultaneously
+press the LRN button of the first channel of the converter and any key on the MIDI bass
+keyboard. The first channel of the converter is marked KTR (key tracking).
+Please remember that the looper-recorder has a clock up-sampling process that needs
+a little time for setting. The first few dozens of milliseconds after MIDI clock start can
+be inaccurate. To avoid this, the timespan between stop and start on your DAW or
+sequencer that feeds MIDI-clock to Pulsar, has to be at least 5 seconds (then the
+up-sampling system stops to wait for the next clock pulse and saves the previous
+value that will be used after clock start).
+A second option is to use the LRST pin for alignment with the clock divider.
+When using MIDI-clock synchronization, we strongly recommend connecting the LRST
+pin to 0.25 out of the clock divider to ensure a perfect sync.
+
+Pressing simultaneously the SHAPE and WARP LRN buttons will stop all MIDI trigger-
+ing. You can use it as a MIDI panic button if your MIDI system freezes.

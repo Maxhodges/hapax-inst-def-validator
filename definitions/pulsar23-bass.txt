@@ -1,0 +1,35 @@
+VERSION 1 
+TRACKNAME PULSAR23:BASS
+TYPE POLY
+OUTPORT B
+OUTCHAN 11
+INPORT NONE
+INCHAN NULL
+MAXRATE NULL
+
+# CC
+# The BASS module's primary controls
+[CC]
+1 MIDI_CV1 KTR # Key Tracking
+5 Portamento
+6 Shape
+7 Warp
+[/CC]
+
+# The BASS module responds to pitch bend with +/- 12 semitones
+[CC_PAIR]
+0:32 Pitch_Bend
+[/CC_PAIR]
+
+[AUTOMATION]
+CC:5 Portamento
+CC:6 Shape
+CC:7 Warp
+[/AUTOMATION]
+
+[COMMENT]
+Pulsar-23 BASS config.
+Set up drums on channel 10 with Pulsar23:DRUM
+To activate Key Tracking (KTR): Press the MIDI_CV1 channel's LRN button while pressing any BASS key
+The MIDI_CV1 output will follow BASS pitch - perfect for making filter cutoff track with notes.
+[/COMMENT]

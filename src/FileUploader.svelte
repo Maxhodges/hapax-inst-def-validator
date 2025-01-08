@@ -60,6 +60,7 @@
     on:dragover|preventDefault
   >
     <label
+      for="file-upload"
       class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-all duration-300 bg-[var(--color-background)] {dragActive
         ? 'border-cyberpunk-cyan'
         : 'border-[var(--color-secondary)/50]'}"
@@ -71,6 +72,7 @@
         <p class="text-xs text-[var(--color-primary)]">format: .TXT</p>
       </div>
       <input
+        id="file-upload"
         type="file"
         class="hidden"
         accept=".txt"
@@ -81,7 +83,9 @@
 
   <!-- Text Input Area -->
   <div class="space-y-2">
+    <label for="definition-input" class="sr-only">Definition Input</label>
     <textarea
+      id="definition-input"
       class="w-full p-4 font-mono text-sm border rounded-lg bg-[var(--color-background)] text-[var(--color-secondary)] border-[var(--color-secondary)/50] focus:border-cyberpunk-cyan focus:ring-1 focus:ring-cyberpunk-cyan"
       rows="10"
       placeholder="// Paste your definition here..."

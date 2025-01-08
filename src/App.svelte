@@ -1,9 +1,10 @@
 <script>
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
-
   import FileUploader from "./FileUploader.svelte";
   import ValidationResults from "./ValidationResults.svelte";
+  import InstrumentDefinitionEditor from "./InstrumentDefinitionEditor.svelte";
+
   import {
     validateVersion,
     validateTrackName,
@@ -28,6 +29,7 @@
   let fileContent = null;
   let userInput = "";
   let showFileContent = false;
+  let activeTab = "validate"; // or 'create'
 
   const validateContent = (text) => {
     try {
@@ -104,20 +106,43 @@
   <!-- Debug: Show themes -->
 
   <div class="container max-w-4xl p-4 pb-16 mx-auto">
-    <div
-      class="p-6 border rounded-lg shadow-xl bg-[var(--color-background)]-50 backdrop-blur-sm border-[var(--color-secondary)/20]"
-    >
-      <Header />
-
-      <FileUploader
-        bind:userInput
-        on:fileLoaded={handleFileLoaded}
-        on:validate={handleValidate}
-        on:error={handleError}
-        on:clear={handleClear}
-      />
-      <ValidationResults {validationResults} {error} />
+    <!-- Tab Navigation -->
+    <div class="flex mb-4 space-x-4">
+      <button
+        class="px-4 py-2 rounded-t-lg {activeTab === 'validate'
+          ? 'bg-theme-primary text-white'
+          : 'bg-theme-alt1 text-theme-text'}"
+        on:click={() => (activeTab = "validate")}
+      >
+        Validate Definition
+      </button>
+      <button
+        class="px-4 py-2 rounded-t-lg {activeTab === 'create'
+          ? 'bg-theme-primary text-white'
+          : 'bg-theme-alt1 text-theme-text'}"
+        on:click={() => (activeTab = "create")}
+      >
+        Create Definition
+      </button>
     </div>
+
+    {#if activeTab === "validate"}
+      <div
+        class="p-6 border rounded-lg shadow-xl bg-[var(--color-background)]-50 backdrop-blur-sm border-[var(--color-secondary)/20]"
+      >
+        <Header />
+        <FileUploader
+          bind:userInput
+          on:fileLoaded={handleFileLoaded}
+          on:validate={handleValidate}
+          on:error={handleError}
+          on:clear={handleClear}
+        />
+        <ValidationResults {validationResults} {error} />
+      </div>
+    {:else}
+      <InstrumentDefinitionEditor />
+    {/if}
   </div>
 </main>
 
