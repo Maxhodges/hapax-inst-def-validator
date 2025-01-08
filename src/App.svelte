@@ -23,13 +23,25 @@
   import { validateCCPairs } from "./lib/validators/ccPairValidator";
   import { validatePCs } from "./lib/validators/pcValidator";
   import { validateMaxRate } from "./lib/validators/headerValidator";
+  import { onMount } from "svelte";
 
   let validationResults = null;
   let error = null;
   let fileContent = null;
   let userInput = "";
   let showFileContent = false;
-  let activeTab = "validate"; // or 'create'
+  let activeTab = window.location.hash.slice(1) || "validate";
+
+  onMount(() => {
+    window.addEventListener("hashchange", () => {
+      activeTab = window.location.hash.slice(1) || "validate";
+    });
+  });
+
+  const handleTabClick = (tab) => {
+    window.location.hash = tab;
+    activeTab = tab;
+  };
 
   const validateContent = (text) => {
     try {
@@ -112,7 +124,7 @@
         class="px-4 py-2 rounded-t-lg {activeTab === 'validate'
           ? 'bg-theme-primary text-white'
           : 'bg-theme-alt1 text-theme-text'}"
-        on:click={() => (activeTab = "validate")}
+        on:click={() => handleTabClick("validate")}
       >
         Validate Definition
       </button>
@@ -120,7 +132,7 @@
         class="px-4 py-2 rounded-t-lg {activeTab === 'create'
           ? 'bg-theme-primary text-white'
           : 'bg-theme-alt1 text-theme-text'}"
-        on:click={() => (activeTab = "create")}
+        on:click={() => handleTabClick("create")}
       >
         Create Definition
       </button>
@@ -140,7 +152,7 @@
         />
         <ValidationResults {validationResults} {error} />
       </div>
-    {:else}
+    {:else if activeTab === "create"}
       <InstrumentDefinitionEditor />
     {/if}
   </div>
