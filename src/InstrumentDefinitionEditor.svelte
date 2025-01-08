@@ -195,13 +195,29 @@
           class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
         >
           <option value="NULL">Select Port...</option>
+          <!-- MIDI Ports -->
           <option value="A">A (MIDI)</option>
           <option value="B">B (MIDI)</option>
           <option value="C">C (MIDI)</option>
           <option value="D">D (MIDI)</option>
+          <!-- USB Ports -->
           <option value="USBD">USBD (Device)</option>
           <option value="USBH">USBH (Host)</option>
-          <!-- Add CV options -->
+          <!-- CV/Gate Group Ports -->
+          <option value="CVG1">CVG1</option>
+          <option value="CVG2">CVG2</option>
+          <option value="CVG3">CVG3</option>
+          <option value="CVG4">CVG4</option>
+          <!-- CV Ports -->
+          <option value="CV1">CV1</option>
+          <option value="CV2">CV2</option>
+          <option value="CV3">CV3</option>
+          <option value="CV4">CV4</option>
+          <!-- Gate Ports -->
+          <option value="G1">G1</option>
+          <option value="G2">G2</option>
+          <option value="G3">G3</option>
+          <option value="G4">G4</option>
         </select>
       </div>
 
