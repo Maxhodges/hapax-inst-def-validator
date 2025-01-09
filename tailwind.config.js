@@ -14,17 +14,7 @@ export default {
           background: "var(--color-background)",
           text: "var(--color-text)",
         },
-        cyberpunk: {
-          black: "#050A0E",
-          yellow: "#FCEE09",
-          red: "#FF003C",
-          cyan: "#00F0FF",
-          white: "#FAFAFA",
-          "black-50": "rgba(4, 10, 14, 0.5)",
-          "yellow-50": "rgba(251, 237, 8, 0.5)",
-          "red-50": "rgba(255, 0, 59, 0.5)",
-          "cyan-50": "rgba(0, 239, 255, 0.5)",
-        },
+
         gray: {
           900: "#050A0E",
           800: "#0A1419",
@@ -36,13 +26,6 @@ export default {
           200: "#284A5B",
           100: "#2D5366",
           50: "#325C71",
-        },
-        evangelion: {
-          green: "#3f6d4e",
-          lime: "#8bd450",
-          purple: "#965fd4",
-          darkPurple: "#734f9a",
-          background: "#1d1a2f",
         },
       },
 
@@ -106,3 +89,10 @@ export default {
   },
   plugins: [],
 };
+
+// $palette-name: 'NeonGenesisEvangelion-新世紀エヴァンゲリオン'
+// $palette-color1: #5f2a62;
+// $palette-color2: #a976c3;
+// $palette-color3: #a0de59;
+// $palette-color4: #466b5a;
+// $palette-color5: #f5c024;

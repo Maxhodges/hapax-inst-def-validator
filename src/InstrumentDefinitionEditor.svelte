@@ -687,7 +687,7 @@
       <button
         type="button"
         on:click={handleGenerate}
-        class="px-6 py-3 text-lg font-semibold transition-colors rounded-md bg-theme-secondary hover:bg-opacity-90"
+        class="px-6 py-3 text-lg font-semibold transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
       >
         Generate Definition File
       </button>

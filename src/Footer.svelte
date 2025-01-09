@@ -11,7 +11,7 @@
         href="https://github.com/Maxhodges/hapax-inst-def-validator"
         target="_blank"
         rel="noopener noreferrer"
-        class="underline text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 decoration-dotted"
+        class="underline text-[var(--color-yellow)] hover:text-[var(--color-primary)]/80 decoration-dotted"
       >
         repository.open()
       </a>
@@ -25,7 +25,7 @@
         href="https://github.com/Maxhodges/noise-engineering-firmware-index"
         target="_blank"
         rel="noopener noreferrer"
-        class="underline text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 decoration-dotted"
+        class="underline text-[var(--color-yellow)] hover:text-[var(--color-primary)]/80 decoration-dotted"
       >
         NE_Firmware_Index
       </a>
@@ -42,7 +42,7 @@
         href="https://maxhodges.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="underline text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 decoration-dotted"
+        class="underline text-[var(--color-yellow)] hover:text-[var(--color-primary)]/80 decoration-dotted"
       >
         Max Hodges
       </a>
@@ -53,17 +53,12 @@
 
 <style>
   footer {
-    position: sticky;
-    bottom: 0;
-    background-color: rgba(
-      4,
-      10,
-      14,
-      0.9
-    ); /* Matches your theme's background */
+    /* Remove position: sticky and bottom: 0 */
+    background-color: rgba(4, 10, 14, 0.9);
     backdrop-filter: blur(8px);
     box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.4);
     text-align: center;
+    /* Keep z-index if needed */
     z-index: 10;
   }
 

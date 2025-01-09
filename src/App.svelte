@@ -112,52 +112,51 @@
     Object.values(validationResults).some((result) => !result.valid);
 </script>
 
-<main class="app-content min-h-screen bg-[var(--color-background)] bg-eva-hex">
-  <div class="container max-w-4xl p-4 pb-16 mx-auto">
-    <!-- Tab Navigation - removed mb-4 and space-x-4 -->
-    <div class="flex">
-      <button
-        class="px-4 py-2 rounded-t-lg {activeTab === 'validate'
-          ? 'bg-theme-secondary text-white'
-          : 'bg-theme-alt1 text-theme-text'}"
-        on:click={() => handleTabClick("validate")}
-      >
-        Validate Definition
-      </button>
-      <button
-        class="px-4 py-2 rounded-t-lg {activeTab === 'create'
-          ? 'bg-theme-secondary text-white'
-          : 'bg-theme-alt1 text-theme-text'}"
-        on:click={() => handleTabClick("create")}
-      >
-        Create Definition
-      </button>
-    </div>
-
-    {#if activeTab === "validate"}
-      <div
-        class="p-6 border rounded-lg shadow-xl bg-[var(--color-background)]-50 backdrop-blur-sm border-[var(--color-secondary)/20] -mt-[1px]"
-      >
-        <Header />
-        <FileUploader
-          bind:userInput
-          on:fileLoaded={handleFileLoaded}
-          on:validate={handleValidate}
-          on:error={handleError}
-          on:clear={handleClear}
-        />
-        <ValidationResults {validationResults} {error} />
+<div class="flex flex-col min-h-screen">
+  <main class="app-content flex-grow bg-[var(--color-background)] bg-eva-hex">
+    <div class="container max-w-4xl p-4 pb-16 mx-auto">
+      <!-- Tab Navigation - removed mb-4 and space-x-4 -->
+      <div class="flex">
+        <button
+          class="px-4 py-2 rounded-t-lg {activeTab === 'validate'
+            ? 'bg-[var(--color-dark-green)] text-white'
+            : 'bg-theme-dark_purple text-theme-text'}"
+          on:click={() => handleTabClick("validate")}
+        >
+          Validate Definition
+        </button>
+        <button
+          class="px-4 py-2 rounded-t-lg {activeTab === 'create'
+            ? 'bg-[var(--color-dark-green)] text-white'
+            : 'bg-theme-dark_purple  text-theme-text'}"
+          on:click={() => handleTabClick("create")}
+        >
+          Create Definition
+        </button>
       </div>
-    {:else if activeTab === "create"}
-      <InstrumentDefinitionEditor />
-    {/if}
-  </div>
-</main>
 
-<Footer />
+      {#if activeTab === "validate"}
+        <div
+          class="p-6 border rounded-lg shadow-xl bg-[var(--color-background)]-50 backdrop-blur-sm border-[var(--color-secondary)/20] -mt-[1px]"
+        >
+          <Header />
+          <FileUploader
+            bind:userInput
+            on:fileLoaded={handleFileLoaded}
+            on:validate={handleValidate}
+            on:error={handleError}
+            on:clear={handleClear}
+          />
+          <ValidationResults {validationResults} {error} />
+        </div>
+      {:else if activeTab === "create"}
+        <InstrumentDefinitionEditor />
+      {/if}
+    </div>
+  </main>
+
+  <Footer />
+</div>
 
 <style>
-  .app-content {
-    min-height: calc(100vh - 4rem); /* Adjust for footer height */
-  }
 </style>

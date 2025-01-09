@@ -37,8 +37,8 @@ h1, h2, h3, h4, h5, h6,
 :root {
   --font-terminal: 'JetBrains Mono', monospace;
   --font-body: 'IBM Plex Sans', sans-serif;
-  --color-primary: #808080;
-  --color-secondary: #8bd44e;
+  --color-primary: hsl(0, 0%, 50%);
+  --color-secondary: #a0de59;
   --color-accent: #965fd4;
   --color-alt1: #292c30;
   --color-alt2: #171a1c;
@@ -46,33 +46,18 @@ h1, h2, h3, h4, h5, h6,
   --color-text: #8bd44e;
   --color-header-bg: #171a1c;
   --color-header-text: #eee;
+  --color-dark-purple: #5f2a62;
+  --color-dark-green: #3F6D4F;
+  --color-yellow: #f5c024;
 }
 
-/* Theme classes remain the same */
-body.cyberpunk {
-  --color-primary: #808080;
-  --color-secondary: #fcee09;
-  --color-accent: #00f0ff;
-  --color-alt1: #292c30;
-  --color-alt2: #171a1c;
-  --color-background: #171a1c;
-  --color-text: #eee;
-  --color-header-bg: #292c30;
-  --color-header-text: #eee;
+test {/* Theme classes remain the same */
+--palette-color1: #5f2a62;
+--palette-color2: #a976c3;
+--palette-color3: #a0de59;
+--palette-color4: #466b5a;
+--palette-color5: #f5c024;
 }
-
-body.evangelion {
-  --color-primary: #808080;
-  --color-secondary: #8bd450;
-  --color-accent: #965fd4;
-  --color-alt1: #292c30;
-  --color-alt2: #171a1c;
-  --color-background: #171a1c;
-  --color-text: #eee;
-  --color-header-bg: #292c30;
-  --color-header-text: #eee;
-}
-
 /* Form elements */
 input::placeholder,
 textarea::placeholder,
