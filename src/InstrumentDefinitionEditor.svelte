@@ -103,8 +103,8 @@
       {
         row: formData.drumLanes.length + 1,
         trig: null,
-        channel: null,
-        note: null,
+        channel: 0,
+        note: 0,
         name: "",
       },
     ];
@@ -113,7 +113,7 @@
   const addCC = () => {
     formData.midicc = [
       ...formData.midicc,
-      { number: null, name: "", defaultValue: null },
+      { number: 0, name: "", defaultValue: null },
     ];
   };
 
@@ -124,7 +124,7 @@
   const addCCPair = () => {
     formData.ccPairs = [
       ...formData.ccPairs,
-      { msb: null, lsb: null, name: "", defaultValue: null },
+      { msb: 0, lsb: 0, name: "", defaultValue: null }, // Set msb to 0 by default
     ];
   };
 
@@ -135,7 +135,7 @@
   const addNRPN = () => {
     formData.nrpns = [
       ...formData.nrpns,
-      { msb: null, lsb: null, depth: 7, name: "", defaultValue: null },
+      { msb: 0, lsb: 0, depth: 7, name: "", defaultValue: null },
     ];
   };
 
@@ -161,27 +161,29 @@
         Basic Configuration
       </h3>
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-theme-text"
+        <label for="track-name" class="block text-sm font-medium"
           >Track Name</label
         >
         <input
+          id="track-name"
           type="text"
           bind:value={formData.trackName}
           required
-          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
           placeholder="Enter track name"
         />
       </div>
 
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-theme-text"
+        <label for="track_type" class="block text-sm font-medium"
           >Track Type</label
         >
         <select
+          id="track-type"
           bind:value={formData.trackType}
-          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
         >
-          <option value="NULL">Select Type...</option>
+          <option value="NULL">NULL</option>
           <option value="POLY">Polyphonic MIDI</option>
           <option value="DRUM">Drum Sequencer</option>
           <option value="MPE">MIDI Polyphonic Expression</option>
@@ -189,17 +191,18 @@
       </div>
 
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-theme-text">
+        <label for="output-port" class="block text-sm font-medium">
           Output Port
-          <span class="text-xs text-theme-text/70"
+          <span class="text-xs /70"
             >(A/B/C/D: MIDI, USBD/USBH: USB, CVG1-4/CV1-4/G1-4: CV)</span
           >
         </label>
         <select
+          id="output-port"
           bind:value={formData.outPort}
-          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
         >
-          <option value="NULL">Select Port...</option>
+          <option value="NULL">NULL</option>
           <!-- MIDI Ports -->
           <option value="A">A (MIDI)</option>
           <option value="B">B (MIDI)</option>
@@ -227,15 +230,14 @@
       </div>
 
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-theme-text">
+        <label for="output-channel" class="block text-sm font-medium">
           Output Channel
-          <span class="text-xs text-theme-text/70"
-            >(1-16, or NULL for non-MIDI ports)</span
-          >
+          <span class="text-xs /70">(1-16, or NULL for non-MIDI ports)</span>
         </label>
         <select
+          id="output-channel"
           bind:value={formData.outChannel}
-          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
         >
           <option value={null}>NULL</option>
           {#each Array(16) as _, i}
@@ -245,17 +247,18 @@
       </div>
 
       <div class="space-y-2">
-        <label class="block text-sm font-medium text-theme-text">
+        <label for="input-port" class="block text-sm font-medium">
           Input Port
-          <span class="text-xs text-theme-text/70"
+          <span class="text-xs /70"
             >(NONE, ALLACTIVE, A/B: MIDI, USBD/USBH: USB, CVG)</span
           >
         </label>
         <select
+          id="input-port"
           bind:value={formData.inPort}
-          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
         >
-          <option value="NULL">Select Port...</option>
+          <option value="NULL">NULL</option>
           <option value="NONE">NONE</option>
           <option value="ALLACTIVE">ALLACTIVE</option>
           <option value="A">A (MIDI)</option>
@@ -268,15 +271,15 @@
 
       <div class="space-y-2">
         <!-- svelte-ignore a11y-label-has-associated-control -->
-        <label class="block text-sm font-medium text-theme-text">
+        <label class="block text-sm font-medium">
           Input Channel
-          <span class="text-xs text-theme-text/70"
+          <span class="text-xs /70"
             >(1-16, ALL, or NULL; ignored for NONE/ALLACTIVE/CVG)</span
           >
         </label>
         <select
           bind:value={formData.inChannel}
-          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
         >
           <option value={null}>NULL</option>
           <option value="ALL">ALL</option>
@@ -296,30 +299,35 @@
             style="grid-template-columns: 120px 1fr 100px;"
           >
             <div class="space-y-1">
-              <label class="text-xs text-theme-text">Note</label>
-              <input
-                type="number"
+              <label for="drum-note-{i}" class="text-xs">Note</label>
+              <select
+                id="drum-note-{i}"
                 bind:value={lane.note}
-                min="0"
-                max="127"
-                placeholder="0-127"
-                class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
-              />
+                class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
+              >
+                {#each ccValues as value}
+                  <option {value}>{value}</option>
+                {/each}
+              </select>
             </div>
 
             <div class="space-y-1">
-              <label class="text-xs text-theme-text">Name</label>
+              <label for="drum-name-{i}" class="text-xs">Name</label>
               <input
+                id="drum-name-{i}"
                 type="text"
                 bind:value={lane.name}
                 placeholder="e.g., Kick"
-                class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+                class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
               />
             </div>
 
             <div>
-              <label class="invisible text-xs">Remove</label>
+              <label for="remove-drum-lane-{i}" class="invisible text-xs"
+                >Remove</label
+              >
               <button
+                id="remove-drum-lane-{i}"
                 type="button"
                 on:click={() =>
                   (formData.drumLanes = formData.drumLanes.filter(
@@ -336,7 +344,7 @@
         <button
           type="button"
           on:click={addDrumLane}
-          class="w-full px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
+          class="px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
         >
           Add Drum Lane
         </button>
@@ -352,15 +360,12 @@
           style="grid-template-columns: 120px 1fr 120px 100px;"
         >
           <div class="space-y-1">
-            <label for="cc-number-{i}" class="text-xs text-theme-text"
-              >CC Number</label
-            >
+            <label for="cc-number-{i}" class="text-xs">CC Number</label>
             <select
               id="cc-number-{i}"
               bind:value={cc.number}
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
             >
-              <option value={null}>Select CC...</option>
               {#each ccValues as value}
                 <option {value}>{value}</option>
               {/each}
@@ -368,27 +373,24 @@
           </div>
 
           <div class="space-y-1">
-            <label for="cc-name-{i}" class="text-xs text-theme-text">Name</label
-            >
+            <label for="cc-name-{i}" class="text-xs">Name</label>
             <input
               id="cc-name-{i}"
               type="text"
               bind:value={cc.name}
               placeholder="CC Name"
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
             />
           </div>
 
           <div class="space-y-1">
-            <label for="cc-default-{i}" class="text-xs text-theme-text"
-              >Default Value</label
-            >
+            <label for="cc-default-{i}" class="text-xs">Default Value</label>
             <select
               id="cc-default-{i}"
               bind:value={cc.defaultValue}
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
             >
-              <option value={null}>Select Value...</option>
+              <option value={null}>NULL</option>
               {#each ccValues as value}
                 <option {value}>{value}</option>
               {/each}
@@ -396,8 +398,9 @@
           </div>
 
           <div>
-            <label class="invisible text-xs">Remove</label>
+            <label for="remove-cc-{i}" class="invisible text-xs">Remove</label>
             <button
+              id="remove-cc-{i}"
               type="button"
               on:click={() => removeCC(i)}
               class="w-full p-2 text-white bg-red-500 rounded-md hover:bg-red-600"
@@ -411,7 +414,7 @@
       <button
         type="button"
         on:click={addCC}
-        class="w-full px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
+        class="px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
       >
         Add CC
       </button>
@@ -426,50 +429,45 @@
           style="grid-template-columns: 120px 120px 1fr 120px 100px;"
         >
           <div class="space-y-1">
-            <label for="ccpair-msb-{i}" class="text-xs text-theme-text"
-              >MSB (0-127)</label
-            >
-            <input
+            <label for="ccpair-msb-{i}" class="text-xs"> MSB (0-127) </label>
+            <select
               id="ccpair-msb-{i}"
-              type="number"
               bind:value={pair.msb}
-              min="0"
-              max="127"
-              placeholder="MSB"
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
-            />
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
+            >
+              {#each ccValues as value}
+                <option {value}>{value}</option>
+              {/each}
+            </select>
           </div>
 
           <div class="space-y-1">
-            <label for="ccpair-lsb-{i}" class="text-xs text-theme-text"
-              >LSB (0-127)</label
-            >
-            <input
+            <label for="ccpair-lsb-{i}" class="text-xs">LSB (0-127)</label>
+            <select
               id="ccpair-lsb-{i}"
-              type="number"
               bind:value={pair.lsb}
-              min="0"
-              max="127"
-              placeholder="LSB"
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
-            />
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
+            >
+              <option value={null}>NULL</option>
+              {#each ccValues as value}
+                <option {value}>{value}</option>
+              {/each}
+            </select>
           </div>
 
           <div class="space-y-1">
-            <label for="ccpair-name-{i}" class="text-xs text-theme-text"
-              >Name</label
-            >
+            <label for="ccpair-name-{i}" class="text-xs">Name</label>
             <input
               id="ccpair-name-{i}"
               type="text"
               bind:value={pair.name}
               placeholder="CC Pair Name"
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
             />
           </div>
 
           <div class="space-y-1">
-            <label for="ccpair-default-{i}" class="text-xs text-theme-text"
+            <label for="ccpair-default-{i}" class="text-xs"
               >Default (0-16383)</label
             >
             <input
@@ -479,13 +477,16 @@
               min="0"
               max="16383"
               placeholder="0-16383"
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
             />
           </div>
 
           <div>
-            <label class="invisible text-xs">Remove</label>
+            <label for="remove-ccpair-{i}" class="invisible text-xs"
+              >Remove</label
+            >
             <button
+              id="remove-ccpair-{i}"
               type="button"
               on:click={() => removeCCPair(i)}
               class="w-full p-2 text-white bg-red-500 rounded-md hover:bg-red-600"
@@ -499,7 +500,7 @@
       <button
         type="button"
         on:click={addCCPair}
-        class="w-full px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
+        class="px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
       >
         Add CC Pair
       </button>
@@ -514,34 +515,39 @@
           style="grid-template-columns: 120px 120px 120px 1fr 120px 100px;"
         >
           <div class="space-y-1">
-            <label class="text-xs text-theme-text">MSB (0-127)</label>
-            <input
-              type="number"
-              bind:value={nrpn.msb}
-              min="0"
-              max="127"
-              placeholder="MSB"
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
-            />
-          </div>
-
-          <div class="space-y-1">
-            <label class="text-xs text-theme-text">LSB (0-127)</label>
-            <input
-              type="number"
-              bind:value={nrpn.lsb}
-              min="0"
-              max="127"
-              placeholder="LSB"
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
-            />
-          </div>
-
-          <div class="space-y-1">
-            <label class="text-xs text-theme-text">Depth</label>
+            <label for="nrpn-msb-{i}" class="text-xs">MSB (0-127)</label>
             <select
+              id="nrpn-msb-{i}"
+              bind:value={nrpn.msb}
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
+            >
+              <option value={null}>NULL</option>
+              {#each ccValues as value}
+                <option {value}>{value}</option>
+              {/each}
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <label for="nrpn-lsb-{i}" class="text-xs">LSB (0-127)</label>
+            <select
+              id="nrpn-lsb-{i}"
+              bind:value={nrpn.lsb}
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
+            >
+              <option value={null}>NULL</option>
+              {#each ccValues as value}
+                <option {value}>{value}</option>
+              {/each}
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <label for="nrpn-depth-{i}" class="text-xs">Depth</label>
+            <select
+              id="nrpn-depth-{i}"
               bind:value={nrpn.depth}
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
             >
               <option value="7">7-bit</option>
               <option value="14">14-bit</option>
@@ -549,30 +555,34 @@
           </div>
 
           <div class="space-y-1">
-            <label class="text-xs text-theme-text">Name</label>
+            <label for="nrpn-name-{i}" class="text-xs">Name</label>
             <input
+              id="nrpn-name-{i}"
               type="text"
               bind:value={nrpn.name}
               placeholder="NRPN Name"
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
             />
           </div>
 
           <div class="space-y-1">
-            <label class="text-xs text-theme-text">Default Value</label>
+            <label for="nrpn-default-{i}" class="text-xs">Default Value</label>
             <input
+              id="nrpn-default-{i}"
               type="number"
               bind:value={nrpn.defaultValue}
               min="0"
               max={nrpn.depth === 7 ? 127 : 16383}
               placeholder={nrpn.depth === 7 ? "0-127" : "0-16383"}
-              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+              class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
             />
           </div>
 
           <div>
-            <label class="invisible text-xs">Remove</label>
+            <label for="remove-nrpn-{i}" class="invisible text-xs">Remove</label
+            >
             <button
+              id="remove-nrpn-{i}"
               type="button"
               on:click={() => removeNRPN(i)}
               class="w-full p-2 text-white bg-red-500 rounded-md hover:bg-red-600"
@@ -586,7 +596,7 @@
       <button
         type="button"
         on:click={addNRPN}
-        class="w-full px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
+        class="px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
       >
         Add NRPN
       </button>
@@ -596,31 +606,26 @@
     <section class="space-y-4">
       <h3 class="text-xl font-semibold text-theme-accent">Comments</h3>
       <div class="space-y-2">
-        <label
-          for="user-comments"
-          class="block text-sm font-medium text-theme-text"
-        >
+        <label for="user-comments" class="block text-sm font-medium">
           User Comments
-          <span class="text-xs text-theme-text/70"
-            >(Will be readable from Hapax)</span
-          >
+          <span class="text-xs /70">(Will be readable from Hapax)</span>
         </label>
         <textarea
           id="user-comments"
           bind:value={formData.comment}
           rows="4"
-          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2 text-theme-text"
+          class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
           placeholder="Enter any comments about this instrument definition..."
         />
       </div>
     </section>
 
     <!-- Generate Button -->
-    <section class="mt-8">
+    <section class="flex justify-center mt-8">
       <button
         type="button"
         on:click={handleGenerate}
-        class="w-full px-6 py-3 text-lg font-semibold text-white transition-colors rounded-md bg-theme-primary hover:bg-opacity-90"
+        class="px-6 py-3 text-lg font-semibold text-[var(--color-background)] transition-colors rounded-md bg-theme-secondary hover:bg-opacity-90"
       >
         Generate Definition File
       </button>
