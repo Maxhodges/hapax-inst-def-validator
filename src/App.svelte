@@ -113,11 +113,9 @@
 </script>
 
 <main class="app-content min-h-screen bg-[var(--color-background)] bg-eva-hex">
-  <!-- Debug: Show themes -->
-
   <div class="container max-w-4xl p-4 pb-16 mx-auto">
-    <!-- Tab Navigation -->
-    <div class="flex mb-4 space-x-4">
+    <!-- Tab Navigation - removed mb-4 and space-x-4 -->
+    <div class="flex">
       <button
         class="px-4 py-2 rounded-t-lg {activeTab === 'validate'
           ? 'bg-theme-secondary text-white'
@@ -138,7 +136,7 @@
 
     {#if activeTab === "validate"}
       <div
-        class="p-6 border rounded-lg shadow-xl bg-[var(--color-background)]-50 backdrop-blur-sm border-[var(--color-secondary)/20]"
+        class="p-6 border rounded-lg shadow-xl bg-[var(--color-background)]-50 backdrop-blur-sm border-[var(--color-secondary)/20] -mt-[1px]"
       >
         <Header />
         <FileUploader
