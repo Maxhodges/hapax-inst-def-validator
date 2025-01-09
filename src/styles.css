@@ -1,6 +1,10 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 /* Global styles */
 body {
@@ -18,10 +22,21 @@ body {
   color: #EEE;
   margin: 0;
   min-height: 100vh;
+  font-family: 'IBM Plex Sans', sans-serif; /* Base font for body text */
+}
+
+/* Add heading styles */
+h1, h2, h3, h4, h5, h6,
+.terminal-text,
+.section-header {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.02em; /* Slight letter spacing adjustment for headers */
 }
 
 /* Themes */
 :root {
+  --font-terminal: 'JetBrains Mono', monospace;
+  --font-body: 'IBM Plex Sans', sans-serif;
   --color-primary: #808080;
   --color-secondary: #8bd44e;
   --color-accent: #965fd4;
@@ -33,6 +48,7 @@ body {
   --color-header-text: #eee;
 }
 
+/* Theme classes remain the same */
 body.cyberpunk {
   --color-primary: #808080;
   --color-secondary: #fcee09;
@@ -57,12 +73,14 @@ body.evangelion {
   --color-header-text: #eee;
 }
 
+/* Form elements */
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
   color: var(--color-accent);
   opacity: 0.7;
   font-style: italic;
+  font-family: var(--font-terminal); /* Terminal style for placeholders */
 }
 
 input,
@@ -70,4 +88,14 @@ select,
 textarea,
 .form-control {
   color: var(--color-secondary);
+  font-family: var(--font-terminal); /* Terminal style for input text */
+}
+
+/* Add specific utility classes for font usage */
+.font-terminal {
+  font-family: var(--font-terminal);
+}
+
+.font-body {
+  font-family: var(--font-body);
 }

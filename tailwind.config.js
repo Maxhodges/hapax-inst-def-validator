@@ -45,6 +45,7 @@ export default {
           background: "#1d1a2f",
         },
       },
+
       backgroundImage: {
         "cyber-grid": `
           linear-gradient(45deg, rgba(0, 240, 255, 0.05) 25%, transparent 25%),
@@ -52,7 +53,42 @@ export default {
           linear-gradient(45deg, transparent 75%, rgba(0, 240, 255, 0.05) 75%),
           linear-gradient(-45deg, transparent 75%, rgba(0, 240, 255, 0.05) 75%)
         `,
+        "eva-grid": `
+        linear-gradient(to right, rgba(139, 212, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(139, 212, 80, 0.03) 1px, transparent 1px)
+      `,
+
+        // EVA Hex Pattern - inspired by EVA unit armor panels
+        "eva-hex": `
+        radial-gradient(circle farthest-side at 0% 50%, rgba(150, 95, 212, 0.07) 23.5%, rgba(240, 240, 240, 0.001) 0),
+        radial-gradient(circle farthest-side at 5.2% 34.7%, rgba(150, 95, 212, 0.07) 8%, rgba(240, 240, 240, 0.001) 0),
+        radial-gradient(circle farthest-side at 2.4% 13.2%, rgba(150, 95, 212, 0.07) 8%, rgba(240, 240, 240, 0.001) 0)
+      `,
+
+        // Terminal Scan - inspired by NERV computer displays
+        "eva-scan": `
+        linear-gradient(to bottom,
+          transparent 50%,
+          rgba(139, 212, 80, 0.03) 50%,
+          rgba(139, 212, 80, 0.03) 51%,
+          transparent 51%
+        )
+      `,
+
+        // NERV Pattern - inspired by the NERV logo and angular designs
+        "eva-nerv": `
+        linear-gradient(60deg, rgba(150, 95, 212, 0.05) 25%, transparent 25.5%, transparent 75%, rgba(150, 95, 212, 0.05) 75.5%),
+        linear-gradient(-60deg, rgba(139, 212, 80, 0.05) 25%, transparent 25.5%, transparent 75%, rgba(139, 212, 80, 0.05) 75.5%)
+      `,
+
+        // Circuit Pattern - inspired by MAGI system displays
+        "eva-circuit": `
+        linear-gradient(to right, rgba(139, 212, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(139, 212, 80, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(150, 95, 212, 0.05) 2px, transparent 2px)
+      `,
       },
+
       keyframes: {
         glitch: {
           "0%": { transform: "translate(0)" },

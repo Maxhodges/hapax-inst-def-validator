@@ -158,7 +158,7 @@
   <form class="space-y-6">
     <section class="space-y-4">
       <h3 class="text-xl font-semibold text-theme-accent">
-        Basic Configuration
+        // Basic Configuration //
       </h3>
       <div class="space-y-2">
         <label for="track-name" class="block text-sm font-medium"
@@ -292,7 +292,9 @@
 
     {#if formData.trackType === "DRUM"}
       <section class="space-y-4">
-        <h3 class="text-xl font-semibold text-theme-accent">Drum Lanes</h3>
+        <h3 class="text-xl font-semibold text-theme-accent">
+          // Drum Lanes //
+        </h3>
         {#each formData.drumLanes as lane, i}
           <div
             class="grid gap-4"
@@ -409,7 +411,7 @@
 
     <!-- CC Section -->
     <section class="space-y-4">
-      <h3 class="text-xl font-semibold text-theme-accent">MIDI CC</h3>
+      <h3 class="text-xl font-semibold text-theme-accent">// MIDI CC //</h3>
       {#each formData.midicc as cc, i}
         <div
           class="grid gap-4"
@@ -478,7 +480,9 @@
 
     <!-- CC Pairs Section -->
     <section class="space-y-4">
-      <h3 class="text-xl font-semibold text-theme-accent">CC Pairs (14-bit)</h3>
+      <h3 class="text-xl font-semibold text-theme-accent">
+        // CC Pairs (14-bit) //
+      </h3>
       {#each formData.ccPairs as pair, i}
         <div
           class="grid gap-4"
@@ -564,7 +568,7 @@
 
     <!-- NRPN Section -->
     <section class="space-y-4">
-      <h3 class="text-xl font-semibold text-theme-accent">NRPN</h3>
+      <h3 class="text-xl font-semibold text-theme-accent">// NRPN //</h3>
       {#each formData.nrpns as nrpn, i}
         <div
           class="grid gap-4"
@@ -660,18 +664,20 @@
 
     <!-- Comment Section -->
     <section class="space-y-4">
-      <h3 class="text-xl font-semibold text-theme-accent">Comments</h3>
+      <h3 class="text-xl font-semibold uppercase text-theme-accent">
+        // Tactical Notes //
+      </h3>
       <div class="space-y-2">
         <label for="user-comments" class="block text-sm font-medium">
-          User Comments
-          <span class="text-xs /70">(Will be readable from Hapax)</span>
+          Field Report
+          <span class="text-xs /70">(Accessible via HAPAX Terminal)</span>
         </label>
         <textarea
           id="user-comments"
           bind:value={formData.comment}
           rows="4"
           class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
-          placeholder="Enter any comments about this instrument definition..."
+          placeholder="Input mission-critical data regarding this instrument configuration..."
         />
       </div>
     </section>

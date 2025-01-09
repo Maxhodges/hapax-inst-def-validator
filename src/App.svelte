@@ -112,9 +112,7 @@
     Object.values(validationResults).some((result) => !result.valid);
 </script>
 
-<main
-  class="app-content min-h-screen bg-[var(--color-background)] bg-cyber-grid"
->
+<main class="app-content min-h-screen bg-[var(--color-background)] bg-eva-hex">
   <!-- Debug: Show themes -->
 
   <div class="container max-w-4xl p-4 pb-16 mx-auto">
@@ -122,7 +120,7 @@
     <div class="flex mb-4 space-x-4">
       <button
         class="px-4 py-2 rounded-t-lg {activeTab === 'validate'
-          ? 'bg-theme-primary text-white'
+          ? 'bg-theme-secondary text-white'
           : 'bg-theme-alt1 text-theme-text'}"
         on:click={() => handleTabClick("validate")}
       >
@@ -130,7 +128,7 @@
       </button>
       <button
         class="px-4 py-2 rounded-t-lg {activeTab === 'create'
-          ? 'bg-theme-primary text-white'
+          ? 'bg-theme-secondary text-white'
           : 'bg-theme-alt1 text-theme-text'}"
         on:click={() => handleTabClick("create")}
       >
