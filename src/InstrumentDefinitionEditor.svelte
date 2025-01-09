@@ -103,8 +103,8 @@
       {
         row: formData.drumLanes.length + 1,
         trig: null,
-        channel: 0,
-        note: 0,
+        channel: null,
+        note: null,
         name: "",
       },
     ];
@@ -296,8 +296,62 @@
         {#each formData.drumLanes as lane, i}
           <div
             class="grid gap-4"
-            style="grid-template-columns: 120px 1fr 100px;"
+            style="grid-template-columns: 80px 120px 120px 120px 1fr 100px;"
           >
+            <div class="space-y-1">
+              <label for="drum-row-{i}" class="text-xs">Row</label>
+              <select
+                id="drum-row-{i}"
+                bind:value={lane.row}
+                class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
+              >
+                {#each Array(8) as _, idx}
+                  <option value={idx + 1}>{idx + 1}</option>
+                {/each}
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="drum-trig-{i}" class="text-xs">Trig</label>
+              <select
+                id="drum-trig-{i}"
+                bind:value={lane.trig}
+                class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
+              >
+                <option value={null}>NULL</option>
+                {#each ccValues as value}
+                  <option {value}>{value}</option>
+                {/each}
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="drum-channel-{i}" class="text-xs">Channel</label>
+              <select
+                id="drum-channel-{i}"
+                bind:value={lane.channel}
+                class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
+              >
+                <option value={null}>NULL</option>
+                {#each Array(16) as _, idx}
+                  <option value={idx + 1}>{idx + 1}</option>
+                {/each}
+                <!-- CV/Gate options -->
+                <option value="G1">G1</option>
+                <option value="G2">G2</option>
+                <option value="G3">G3</option>
+                <option value="G4">G4</option>
+                <option value="CV1">CV1</option>
+                <option value="CV2">CV2</option>
+                <option value="CV3">CV3</option>
+                <option value="CV4">CV4</option>
+                <option value="CVG1">CVG1</option>
+                <option value="CVG2">CVG2</option>
+                <option value="CVG3">CVG3</option>
+                <option value="CVG4">CVG4</option>
+              </select>
+            </div>
+
             <div class="space-y-1">
               <label for="drum-note-{i}" class="text-xs">Note</label>
               <select
@@ -305,6 +359,7 @@
                 bind:value={lane.note}
                 class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
               >
+                <option value={null}>NULL</option>
                 {#each ccValues as value}
                   <option {value}>{value}</option>
                 {/each}
@@ -317,7 +372,7 @@
                 id="drum-name-{i}"
                 type="text"
                 bind:value={lane.name}
-                placeholder="e.g., Kick"
+                placeholder="KICK"
                 class="w-full p-2 border rounded-md bg-theme-alt1 border-theme-alt2"
               />
             </div>
@@ -345,6 +400,7 @@
           type="button"
           on:click={addDrumLane}
           class="px-4 py-2 text-white transition-colors rounded-md bg-theme-accent hover:bg-opacity-90"
+          disabled={formData.drumLanes.length >= 8}
         >
           Add Drum Lane
         </button>
@@ -621,7 +677,7 @@
     </section>
 
     <!-- Generate Button -->
-    <section class="flex justify-center mt-8">
+    <section class="flex flex-col items-center w-full mt-8">
       <button
         type="button"
         on:click={handleGenerate}
@@ -631,12 +687,12 @@
       </button>
 
       {#if generatedContent}
-        <div class="mt-4 space-y-2">
+        <div class="w-full mt-8 space-y-2">
           <h4 class="text-lg font-semibold text-theme-accent">
             Generated Definition:
           </h4>
           <pre
-            class="p-4 overflow-x-auto font-mono text-sm rounded-md bg-theme-alt1 border-theme-alt2">{generatedContent}</pre>
+            class="w-full p-4 overflow-x-auto font-mono text-sm whitespace-pre-wrap border rounded-md bg-theme-alt1 border-theme-alt2">{generatedContent}</pre>
         </div>
       {/if}
     </section>
