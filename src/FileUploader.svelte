@@ -93,13 +93,13 @@
     />
     <div class="flex items-center space-x-2">
       <button
-        class="px-4 py-2 font-mono transition-all rounded-lg text-[var(--color-background)] bg-[var(--color-secondary)] hover:bg-opacity-90 active:scale-95"
+        class="px-4 py-2 font-mono transition-all rounded-lg bg-[var(--color-secondary)] hover:bg-opacity-90 active:scale-95"
         on:click={handleTextareaValidation}
       >
         VALIDATE_
       </button>
       <button
-        class="px-4 py-2 font-mono transition-all rounded-lg text-[var(--color-background)] bg-[var(--color-accent)] hover:bg-opacity-90 active:scale-95"
+        class="px-4 py-2 font-mono transition-all rounded-lg bg-[var(--color-accent)] hover:bg-opacity-90 active:scale-95"
         on:click={() => {
           userInput = "";
           dispatch("clear");
